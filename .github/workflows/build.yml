@@ -32,8 +32,8 @@ jobs:
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
-          command: buildozer android debug
-          buildozer_version: master
+          command: pip3 install --user --upgrade Cython==0.29.33 virtualenv; buildozer android debug
+          buildozer_version: stable
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
