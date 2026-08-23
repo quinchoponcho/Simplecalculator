@@ -1,23 +1,14 @@
-from tkinter import Tk, Label, Button, Entry
+import kivy
+
+from kivy.app import App
+from kivy.uix.button import Button
 
 
-class Root(Tk):
+class MyApp(App):
 
-    def __init__(self):
-        super().__init__()
-        self.title_label = Label(self, text="A simple eval-based calculator, \nnot for production usage :)")
-        self.title_label.pack()
-        self.entry = Entry(self)
-        self.entry.pack()
-        self.entry.insert(0, "1+2")
-        self.label = Label(self, text="")
-        self.label.pack()
-        self.button = Button(self, text="Compute", command=self.onclick)
-        self.button.pack()
-
-    def onclick(self):
-        self.label.configure(text=str(eval(self.entry.get())))
+    def build(self):
+        return Button(text='Hello World')
 
 
-root = Root()
-root.mainloop()
+if __name__ == '__main__':
+    MyApp().run()
