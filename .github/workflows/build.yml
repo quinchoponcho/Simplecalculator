@@ -28,7 +28,7 @@ jobs:
             zip \
             unzip \
             openjdk-17-jdk \
-            libstdc++6:i386 \
+            libstdc++6 \
             aidl \ 
       # 2. Setup Java Environment (Buildozer requires a specific Java path)
       - name: Set up JDK 17
