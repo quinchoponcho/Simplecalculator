@@ -28,13 +28,11 @@ jobs:
             zip \
             unzip \
             openjdk-17-jdk \
+            libstdc++6 \
+            aidl
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3          
-        
-      - name: Install System Dependencies & AIDL
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential libstdc++6 aidl
+
       - name: Accept Android SDK Licenses
         run: |
           # Create the local buildozer target directory to pre-initialize the SDK path
