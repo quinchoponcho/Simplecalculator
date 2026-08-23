@@ -1,5 +1,7 @@
 name: Android Build
 
+
+
 on:
   push:
     branches:
@@ -121,6 +123,9 @@ jobs:
           pip install buildozer cython>=3.0.10
 
       # Build with Buildozer
+      - name: Clear Buildozer Cache
+        run: rm -rf .buildozer/android/platform/build-*
+        
       - name: Build with Buildozer
         id: buildozer
         run: |
