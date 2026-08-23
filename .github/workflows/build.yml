@@ -33,19 +33,7 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3          
 
-      - name: Accept Android SDK Licenses
-        run: |
-          # Create the local buildozer target directory to pre-initialize the SDK path
-          mkdir -p ./.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin
-          
-          # Automatically accept all licenses using the system's built-in Android SDK
-          yes | sdkmanager --licenses  || true
-          
-          # Pass the accepted licenses into Buildozer's custom SDK target directory
-          if [ -d "$ANDROID_HOME/licenses" ]; then
-            mkdir -p ./.buildozer/android/platform/android-sdk/licenses
-            cp -r $ANDROID_HOME/licenses/* ./.buildozer/android/platform/android-sdk/licenses/
-          fi    
+      
       # 2. Setup Java Environment (Buildozer requires a specific Java path)
       - name: Set up JDK 17
         uses: actions/setup-java@v5
