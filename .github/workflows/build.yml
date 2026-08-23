@@ -112,13 +112,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.14.2' #set your python version
+          python-version: '3.11' #set your python version
 
       # Install pip dependencies
       - name: Install pip dependencies
         run: |
           pip install --upgrade pip
-          pip install buildozer cython==0.29.33
+          pip install buildozer cython>=3.0.10
 
       # Build with Buildozer
       - name: Build with Buildozer
