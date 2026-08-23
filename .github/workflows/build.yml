@@ -1,29 +1,42 @@
-name: CI
+name: Build Kivy App to APK
+
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: # Allows you to trigger the build manually
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
-    
-      - uses: actions/checkout@v2
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-      # used to cache dependencies with a timeout
-  
+    # Buildozer requires substantial disk space; this step clears up unused software on the runner
+    - name: Free Disk Space
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+        android: false
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
 
+    - name: Build with Buildozer
+      uses: ArtemSBulgakov/buildozer-action@v1
+      with:
+        command: buildozer android debug
+        repository_root: .
+        workdir: .
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
-        with:
-          command: buildozer android debug
-          buildozer_version: stable
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Kivy-Android-APK
+        path: ${{ steps.buildozer.outputs.filename }}
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: package
-          path: ${{ steps.buildozer.outputs.filename }}
