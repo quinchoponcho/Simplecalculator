@@ -38,7 +38,7 @@ jobs:
           mkdir -p ./.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin
           
           # Automatically accept all licenses using the system's built-in Android SDK
-          yes | sdkmanager --licenses
+          yes | sdkmanager --licenses  || true
           
           # Pass the accepted licenses into Buildozer's custom SDK target directory
           if [ -d "$ANDROID_HOME/licenses" ]; then
