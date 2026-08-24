@@ -14,6 +14,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: kivy/buildozer:latest
+      options: --user 1000:1000
+
 
     steps:
       - name: Checkout repository
@@ -101,11 +105,7 @@ jobs:
       # -------------------------------------------------------------
       - name: Build Android APK
         run: |
-         docker run --rm \
-          -v ${{ github.workspace }}:/github/workspace \
-          -w /github/workspace \
-          -e BUILDOZER_ALLOW_ROOT=1 \
-          kivy/buildozer:latest buildozer --allow-root android debug
+         yes | buildozer android debug
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
