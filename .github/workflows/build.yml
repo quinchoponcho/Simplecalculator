@@ -99,13 +99,11 @@ jobs:
       # -------------------------------------------------------------
       # BUILD & ARTIFACT UPLOAD
       # -------------------------------------------------------------
-      - name: Build APK with Buildozer
-        uses: docker://kivy/buildozer:latest
-        env:
-          USE_CCACHE: 1
+      - name: Build with Buildozer
+        uses: ArtemSydoryk/buildozer-action@v1
         with:
-        
-          args: yes | buildozer --allow-root android debug
+            command: buildozer --allow-root android debug
+            repository_root: .
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
