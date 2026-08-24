@@ -51,14 +51,11 @@ jobs:
             libtool \
             pkg-config \
             cmake
-      - name: Install build dependencies
+      
+      - name: Install Buildozer & Cython
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libtool autoconf automake pkg-config
-            - name: Install Buildozer & Cython
-              run: |
-                python -m pip install --upgrade pip setuptools wheel
-                python -m pip install buildozer "cython<3.0.0"
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install buildozer "cython<3.0.0"
 
       # -------------------------------------------------------------
       # CACHING STRATEGY
@@ -86,7 +83,10 @@ jobs:
           key: ${{ runner.os }}-ccache-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-ccache-
-
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libtool autoconf automake pkg-config
       # -------------------------------------------------------------
       # BUILD & ARTIFACT UPLOAD
       # -------------------------------------------------------------
