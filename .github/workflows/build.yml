@@ -98,5 +98,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kivy-android-debug-apk
-          path: bin/*.apk
+          path: .github/*.apk
           retention-days: 7
