@@ -50,7 +50,7 @@ jobs:
             autoconf \
             automake \
             libtool \
-            libtoolize \
+            libtool-bin \
             pkg-config \
             cmake \
             m4
