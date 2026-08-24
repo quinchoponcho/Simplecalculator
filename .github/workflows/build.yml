@@ -53,7 +53,13 @@ jobs:
             libtool-bin \
             pkg-config \
             cmake \
-            m4
+            m4 \
+            libltdl-dev
+      
+      - name: Initialize libtool
+        run: |
+          libtoolize --version
+          autoreconf --version
       - name: Install Buildozer & Cython
         run: |
           python -m pip install --upgrade pip setuptools wheel
@@ -90,10 +96,11 @@ jobs:
       # BUILD & ARTIFACT UPLOAD
       # -------------------------------------------------------------
       - name: Build APK with Buildozer
+        uses: docker://kivy/buildozer:latest
         env:
           USE_CCACHE: 1
-        run: |
-          yes | buildozer android debug
+        with:
+          args: yes | buildozer android debug
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
