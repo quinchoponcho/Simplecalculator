@@ -50,9 +50,10 @@ jobs:
             autoconf \
             automake \
             libtool \
+            libtoolize \
             pkg-config \
-            cmake
-
+            cmake \
+            m4
       - name: Install Buildozer & Cython
         run: |
           python -m pip install --upgrade pip setuptools wheel
